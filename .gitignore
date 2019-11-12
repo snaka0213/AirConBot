@@ -2,3 +2,7 @@ __pycache__/
 .DS_Store
 .env
 *.json
+
+codes
+decodes
+*dht11.py
