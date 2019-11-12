@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import time
 import functools
-from ir_playback import IR_PLAYBACK
+from .ir_playback import IR_PLAYBACK
 
 class RemoteForApp(object):
-    def __init__(self, *, pi, gpio, code_file):
+    def __init__(self, pi, gpio, code_file):
         """
         pi (pigpio): an instance of pigpio
         gpio (int): gpio pin number

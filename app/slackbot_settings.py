@@ -15,4 +15,4 @@ PLUGINS = ['plugins']
 ### AirCon ###
 GPIO_IR = 17
 GPIO_TH = 18
-CODE_FILE = "plugins/aircon/codes"
+CODE_FILE = "aircon/codes"
