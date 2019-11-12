@@ -22,21 +22,13 @@ class IR_PLAYBACK(object):
     def setup(self):
         """
         IR RX connected to gpio.
-        Ignores glitches.
         """
-        pi = self.pi
-        gpio = self.gpio
-
-        pi.set_mode(gpio, pigpio.OUTPUT)
-        pi.wave_add_new()
+        self.pi.set_mode(self.gpio, pigpio.OUTPUT)
 
     def playback(self, *, file_name, command):
         """
         Playback.
         """
-        pi = self.pi
-        gpio = self.gpio
-
         try:
             with open(file_name, "r") as f:
                 records = json.load(f)
@@ -44,6 +36,7 @@ class IR_PLAYBACK(object):
             print("Can't open: {}".format(file_name))
             return
 
+        self.pi.wave_add_new()
         emit_time = time.time()
         if not command in records.keys():
             print("Id {} not found".format(command))
@@ -61,7 +54,7 @@ class IR_PLAYBACK(object):
             ci = code[i]
             if self._is_mark(i): # Mark
                 if ci not in marks_wid.keys():
-                    wf = self.carrier(gpio, freq, ci)
+                    wf = self.carrier(ci)
                     pi.wave_add_generic(wf)
                     marks_wid[ci] = pi.wave_create()
                 wave[i] = marks_wid[ci]
